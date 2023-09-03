@@ -39,7 +39,6 @@ const timer = ms => new Promise(res => setTimeout(res, ms));
 
 async function generateMaze() {
     if (isDrawingInProgress) {
-        interruptDrawing = true;
         return;
     }
 
@@ -49,6 +48,7 @@ async function generateMaze() {
 
     isDrawingInProgress = true;
     $(solveMazeBtn).attr("disabled", true);
+    $(generateMazeBtn).attr("disabled", true);
     const isInterrupted = !(await drawMaze(this.maze.creationPath));
     isDrawingInProgress = false;
     if (isInterrupted) {
@@ -56,6 +56,7 @@ async function generateMaze() {
         generateMaze();
     } else {
         $(solveMazeBtn).attr("disabled", false);
+        $(generateMazeBtn).attr("disabled", false);
     }
 }
 

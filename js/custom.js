@@ -14,6 +14,7 @@ const mazeSize = 51;
 const canvasHeight = mazeSize;
 const canvasWidth = mazeSize;
 const canvasBlockSize = 7;
+const url = 'https://mymazegenerator.azurewebsites.net/';
 
 let generateMazeBtn;
 let solveMazeBtn;
@@ -115,7 +116,7 @@ function printMessage(message) {
 
 function requestMaze(height, width) {
     return new Promise(function (resolve, reject) {
-        $.get("http://localhost:8080/?height=" + height + "&width=" + width, function (data, status) {
+        $.get(url + "?height=" + height + "&width=" + width, function (data, status) {
             resolve(data);
         });
     })
@@ -129,7 +130,7 @@ function requestMazeSolution(maze) {
                 'Content-Type': 'application/json'
             },
             'type': 'POST',
-            'url': 'http://localhost:8080/',
+            'url': url,
             'data': JSON.stringify(maze),
             'dataType': 'json',
             'success': function (data) {
